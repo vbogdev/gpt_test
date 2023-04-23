@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Previous 8ball thing history test</title>
+  </head>
+  <body>
+    <h1>Previous 8ball thing history test</h1>
+    
+    <label for="title-input">Title:</label>
+    <input type="text" id="title-input"><br><br>
+    
+    <label for="content-input">Content:</label>
+    <input type="text" id="content-input"><br><br>
+    
+    <button onclick="saveQuestion()">Save</button><br><br>
+    
+    <h2>My Questions:</h2>
+    <ul id="question-list"></ul>
+    
+    <script>
+      let questions = {};
+      const titleInput = document.getElementById("title-input");
+      const contentInput = document.getElementById("content-input");
+      const questionList = document.getElementById("question-list");
+      
+      function saveQuestion() {
+        const title = titleInput.value;
+        const content = contentInput.value;
+        if (title && content) {
+          questions[title] = content;
+          titleInput.value = "";
+          contentInput.value = "";
+          updateQuestionList();
+        }
+      }
+      
+      function updateQuestionList() {
+        questionList.innerHTML = "";
+        for (let title in questions) {
+          const listItem = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = "#";
+          link.textContent = title;
+          link.onclick = function() {
+            alert(questions[title]);
+          };
+          listItem.appendChild(link);
+          questionList.appendChild(listItem);
+        }
+      }
+    </script>
+  </body>
+</html>
